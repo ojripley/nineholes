@@ -9,8 +9,16 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const app = express();
 const server = require('http').Server(app);
-app.use(cors);
+const io = require('socket.io')(server);
+app.use(cors({}));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// start server listening
 server.listen(PORT, () => {
-  console.log(`server listening on port ${8080}`);
+  console.log(`Server listening on port ${PORT}`);
+});
+
+// server greets client
+io.on('connection', (client) => {
+  client.emit('greeting', 'connected');
 });
