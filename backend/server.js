@@ -28,7 +28,10 @@ io.on('connection', (client) => {
   console.log('client connected');
   client.emit('greeting', 'connected');
 
-  client.on('requestGame', () => {
-    console.log('client wants to join game');
+  client.on('requestGame', (options) => {
+    console.log('client wants to join game' + ' options: ');
+    console.log(options);
+
+    
   });
 });

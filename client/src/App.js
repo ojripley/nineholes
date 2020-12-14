@@ -9,10 +9,10 @@ function App() {
 
   const { socket, socketOpen } = useSocket();
 
-  const requestGame = function() {
+  const requestGame = function(options) {
     console.log('requesting game');
     if(socketOpen) {
-      socket.emit('requestGame');
+      socket.emit('requestGame', {options: options});
     }
   };
 
@@ -38,7 +38,7 @@ function App() {
     <div className='app'>
       <Director></Director>
 
-      <div onClick={requestGame}>Find Game</div>
+      <div onClick={() => {requestGame({gameType: 'golf', opponentType: 'random'})}}>Find Game</div>
     </div>
   );
 }
