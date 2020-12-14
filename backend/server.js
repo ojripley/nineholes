@@ -18,7 +18,17 @@ server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
+// alert user of server error
+const broadcastServerError = function(client, msg) {
+  client.emit('serverError', msg);
+}
+
 // server greets client
 io.on('connection', (client) => {
+  console.log('client connected');
   client.emit('greeting', 'connected');
+
+  client.on('requestGame', () => {
+    console.log('client wants to join game');
+  });
 });
